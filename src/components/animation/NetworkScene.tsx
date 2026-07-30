@@ -7,10 +7,7 @@ import { ApiNodes } from "./ApiNodes"
 import * as THREE from "three"
 import gsap from "gsap"
 
-/**
- * Camera controller: starts zoomed in close, animates to final isometric position.
- * Uses useFrame to ensure lookAt is called every frame.
- */
+/** Smooth camera pull-back for the building scene */
 function CameraAnimator() {
   const { camera } = useThree()
   const hasStartedRef = useRef(false)
@@ -19,36 +16,25 @@ function CameraAnimator() {
     if (hasStartedRef.current) return
     hasStartedRef.current = true
 
-    // Initial: zoomed-in close to ground center
     camera.position.set(15, 15, 15)
     ;(camera as THREE.OrthographicCamera).zoom = 45
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
 
-    // Animate to final wide isometric view
     gsap.to(camera.position, {
-      x: 35,
-      y: 35,
-      z: 35,
+      x: 35, y: 35, z: 35,
       duration: 3.2,
-      ease: "power3.inOut",
+      ease: "power2.inOut",
     })
-
     gsap.to(camera as THREE.OrthographicCamera, {
       zoom: 25,
       duration: 3.2,
-      ease: "power3.inOut",
-      onUpdate: () => {
-        camera.updateProjectionMatrix()
-      },
+      ease: "power2.inOut",
+      onUpdate: () => camera.updateProjectionMatrix(),
     })
   }, [camera])
 
-  // Keep camera aimed at origin every frame
-  useFrame(() => {
-    camera.lookAt(0, 0, 0)
-  })
-
+  useFrame(() => { camera.lookAt(0, 0, 0) })
   return null
 }
 
@@ -64,32 +50,17 @@ export function NetworkScene({ onAnimationComplete }: NetworkSceneProps) {
     >
       <Canvas
         orthographic
-        camera={{
-          position: [15, 15, 15],
-          zoom: 45,
-          near: 0.1,
-          far: 1000,
-        }}
+        camera={{ position: [15, 15, 15], zoom: 45, near: 0.1, far: 1000 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100vw", height: "100vh", background: "#0D1117" }}
       >
-        {/* Camera pull-back controller */}
         <CameraAnimator />
-
-        {/* Lighting: ambient base + directional key + 3 colored point lights */}
         <ambientLight intensity={0.25} color="#1E293B" />
-        <directionalLight
-          position={[20, 40, 20]}
-          intensity={1.2}
-          castShadow
-        />
-
-        {/* Neon point lights near building clusters */}
+        <directionalLight position={[20, 40, 20]} intensity={1.2} castShadow />
         <pointLight position={[-5, 3, 5]} color="#EF4444" intensity={4.0} distance={12} />
         <pointLight position={[5, 3, -5]} color="#10B981" intensity={4.0} distance={12} />
         <pointLight position={[0, 4, 0]} color="#3B82F6" intensity={3.5} distance={15} />
 
-        {/* Cyan grid on ground plane */}
         <Grid
           position={[0, -0.01, 0]}
           args={[100, 100]}
@@ -99,11 +70,10 @@ export function NetworkScene({ onAnimationComplete }: NetworkSceneProps) {
           infiniteGrid
         />
 
-        {/* Procedural building nodes with GSAP growth */}
         <ApiNodes onComplete={onAnimationComplete} />
       </Canvas>
 
-      {/* Preloader HUD overlay */}
+      {/* HUD */}
       <div className="absolute bottom-10 left-10 z-10 font-mono text-xs space-y-2 pointer-events-none select-none">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />

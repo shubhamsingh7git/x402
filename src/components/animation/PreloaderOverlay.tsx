@@ -2,48 +2,62 @@
 
 import { useState, useRef, useCallback } from "react"
 import { NetworkScene } from "./NetworkScene"
+import { AgentNetworkOverlay } from "./AgentNetworkOverlay"
 import gsap from "gsap"
 
 interface PreloaderOverlayProps {
   children: React.ReactNode
 }
 
+/**
+ * Three-phase preloader:
+ *   1. `booting`  — 3D isometric buildings grow then collapse
+ *   2. `network`  — 3D AI Agent Network with chip + orbiting nodes
+ *   3. `content`  — main app revealed
+ */
 export function PreloaderOverlay({ children }: PreloaderOverlayProps) {
-  const [isBooting, setIsBooting] = useState(true)
-  const [showContent, setShowContent] = useState(false)
+  const [phase, setPhase] = useState<"booting" | "network" | "content">("booting")
   const overlayRef = useRef<HTMLDivElement>(null)
 
+  // Called when buildings have fully collapsed → switch to network phase
   const handleAnimationComplete = useCallback(() => {
-    // Fade out the 3D preloader overlay
     if (overlayRef.current) {
       gsap.to(overlayRef.current, {
         opacity: 0,
-        duration: 0.8,
+        duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
-          setIsBooting(false)
-          setShowContent(true)
+          setPhase("network")
         },
       })
     } else {
-      setIsBooting(false)
-      setShowContent(true)
+      setPhase("network")
     }
+  }, [])
+
+  // Called when the agent network overlay finishes its display cycle
+  const handleNetworkComplete = useCallback(() => {
+    setPhase("content")
   }, [])
 
   return (
     <>
-      {/* 3D Preloader overlay — sits on top of everything */}
-      {isBooting && (
+      {/* Phase 1: 3D Preloader — isometric buildings */}
+      {phase === "booting" && (
         <div ref={overlayRef} style={{ opacity: 1 }}>
           <NetworkScene onAnimationComplete={handleAnimationComplete} />
         </div>
       )}
 
-      {/* Main app content — fades in after preloader completes */}
+      {/* Phase 2: 3D AI Agent Network */}
+      {phase === "network" && (
+        <AgentNetworkOverlay onComplete={handleNetworkComplete} />
+      )}
+
+      {/* Phase 3: Main app content */}
       <div
         className={`transition-opacity duration-700 ${
-          showContent ? "opacity-100" : "opacity-0 pointer-events-none"
+          phase === "content" ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         {children}

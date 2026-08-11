@@ -1,0 +1,23 @@
+export enum ClusterStatusEnum {
+  HEALTHY = "HEALTHY",
+  DEGRADED = "DEGRADED",
+  PROVISIONING = "PROVISIONING",
+  OFFLINE = "OFFLINE",
+}
+
+export enum DeploymentStatusEnum {
+  RUNNING = "RUNNING",
+  CANARY_PROMOTING = "CANARY_PROMOTING",
+  ROLLING_BACK = "ROLLING_BACK",
+  FAILED = "FAILED",
+  STOPPED = "STOPPED",
+}
+
+export enum PipelineStatusEnum {
+  QUEUED = "QUEUED",
+  BUILDING = "BUILDING",
+  TESTING = "TESTING",
+  SIGNING = "SIGNING",
+  SUCCESS = "SUCCESS",
+  FAILED = "FAILED",
+}

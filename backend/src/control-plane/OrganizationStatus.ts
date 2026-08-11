@@ -1,0 +1,6 @@
+export enum OrganizationStatusEnum {
+  ACTIVE = "ACTIVE",
+  SUSPENDED = "SUSPENDED",
+  PENDING_VERIFICATION = "PENDING_VERIFICATION",
+  ARCHIVED = "ARCHIVED",
+}

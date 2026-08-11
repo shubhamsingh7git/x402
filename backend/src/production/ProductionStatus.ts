@@ -1,0 +1,19 @@
+export enum RegionalAvailabilityStatusEnum {
+  ACTIVE = "ACTIVE",
+  STANDBY = "STANDBY",
+  FAILOVER_IN_PROGRESS = "FAILOVER_IN_PROGRESS",
+  DEGRADED = "DEGRADED",
+}
+
+export enum ReadinessGradeEnum {
+  PRODUCTION_READY = "PRODUCTION_READY",
+  NEEDS_ATTENTION = "NEEDS_ATTENTION",
+  NOT_READY = "NOT_READY",
+}
+
+export enum ChaosStatusEnum {
+  SCHEDULED = "SCHEDULED",
+  RUNNING = "RUNNING",
+  PASSED = "PASSED",
+  FAILED = "FAILED",
+}

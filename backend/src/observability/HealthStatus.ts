@@ -1,0 +1,6 @@
+export enum HealthStatusEnum {
+  HEALTHY = "HEALTHY",
+  DEGRADED = "DEGRADED",
+  UNHEALTHY = "UNHEALTHY",
+  RECOVERING = "RECOVERING",
+}

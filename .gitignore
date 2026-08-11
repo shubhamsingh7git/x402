@@ -1,8 +1,33 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ==========================================================
+# x402 AGENTIC COMMERCE — GITIGNORE CONFIGURATION
+# ==========================================================
 
-# dependencies
-/node_modules
-/.pnp
+# Secrets & Environment Variable Files (CRITICAL SECRETS)
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+
+# Private Keys, Certificates & Credentials
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.asc
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.keystore
+*.jks
+
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -10,32 +35,50 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
+# Build Outputs & Generated Distributables
+dist/
+backend/dist/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+frontend/build/
+*.tsbuildinfo
+frontend/tsconfig.tsbuildinfo
+next-env.d.ts
+frontend/next-env.d.ts
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Log Files & Debugging Artifacts
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+logs/
+*.sys.log
 
-# env files (can opt-in for committing if needed)
-.env*
+# Operating System & IDE Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# vercel
+# Databases & Cache
+*.sqlite
+*.db
+.cache/
 .vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts

@@ -1,0 +1,22 @@
+# Secrets & Environment Configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Dependencies
+node_modules/
+
+# Build Outputs
+dist/
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -197,22 +197,22 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         </aside>
 
         {/* Main Container */}
-        <div className={`flex-1 flex flex-col transition-all duration-300 relative z-10 ${collapsed ? "ml-0 md:ml-20" : "ml-0 md:ml-64"}`}>
+        <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 relative z-10 ${collapsed ? "ml-0 md:ml-20" : "ml-0 md:ml-64"}`}>
         {/* Header Bar */}
-          <header className="h-16 sticky top-0 z-30 bg-background/85 border-b border-border backdrop-blur-xl px-6 flex items-center justify-between shadow-sm">
+          <header className="h-16 sticky top-0 z-30 bg-background/85 border-b border-border backdrop-blur-xl px-3 sm:px-6 flex items-center justify-between shadow-sm">
             <button
               onClick={() => setSearchOpen(true)}
               aria-label="Open global search"
-              className="flex items-center gap-3 px-4 py-2 bg-card hover:bg-secondary border border-border rounded-xl text-xs font-mono text-muted-foreground w-48 sm:w-64 md:w-80 transition-all cursor-pointer ml-10 md:ml-0"
+              className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 bg-card hover:bg-secondary border border-border rounded-xl text-xs font-mono text-muted-foreground w-36 sm:w-64 md:w-80 transition-all cursor-pointer ml-10 md:ml-0 truncate shrink-0"
             >
-              <Search className="w-4 h-4 text-primary" />
-              <span>Search platform...</span>
-              <kbd className="ml-auto px-1.5 py-0.5 bg-secondary border border-border text-[10px] font-mono text-muted-foreground rounded">
+              <Search className="w-4 h-4 text-primary shrink-0" />
+              <span className="truncate">Search platform...</span>
+              <kbd className="hidden sm:inline-block ml-auto px-1.5 py-0.5 bg-secondary border border-border text-[10px] font-mono text-muted-foreground rounded">
                 Ctrl K
               </kbd>
             </button>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
               <LiveStatus />
               <ThemeToggle />
               <NotificationCenter />
@@ -227,7 +227,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto relative z-10"
+              className="flex-1 p-3 sm:p-6 md:p-8 max-w-7xl w-full mx-auto relative z-10 min-w-0 overflow-x-hidden"
               role="main"
             >
               {children}

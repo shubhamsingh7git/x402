@@ -13,7 +13,13 @@ export const initializeSocket = (httpServer: HttpServer): SocketIOServer => {
 
   io = new SocketIOServer(httpServer, {
     cors: {
-      origin: env.clientUrl,
+      origin: (origin, callback) => {
+        if (!origin || origin === env.clientUrl || origin.endsWith(".vercel.app") || origin.includes("localhost")) {
+          callback(null, true);
+        } else {
+          callback(null, true);
+        }
+      },
       methods: ["GET", "POST"],
       credentials: true,
     },

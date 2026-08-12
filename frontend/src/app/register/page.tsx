@@ -70,9 +70,9 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-background relative overflow-hidden selection:bg-primary/30">
       <AuroraBackground />
 
-      <div className="relative z-20 min-h-screen flex items-center justify-center p-4">
+      <div className="relative z-20 min-h-screen flex items-center justify-center p-3 sm:p-4">
         <motion.div
-          className="w-full max-w-[420px] relative"
+          className="w-full max-w-[420px] relative px-1 sm:px-0"
           initial={{ scale: 0.9, opacity: 0, y: 30 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -95,7 +95,7 @@ export default function RegisterPage() {
               transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
             />
 
-            <div className="relative bg-card/80 backdrop-blur-xl border border-border/30 rounded-3xl p-8 sm:p-10 shadow-2xl">
+            <div className="relative bg-card/80 backdrop-blur-xl border border-border/30 rounded-3xl p-5 sm:p-10 shadow-2xl">
               <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] -translate-y-1/2 opacity-20 pointer-events-none"
                 style={{

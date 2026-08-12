@@ -168,21 +168,21 @@ export default function HomePage() {
         {/* Gradient overlay to ensure text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background z-[1]" />
 
-        <div className="relative z-[2] max-w-7xl mx-auto px-6 py-32">
+        <div className="relative z-[2] max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32">
           <div className="max-w-3xl">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-[11px] font-mono font-bold tracking-wider uppercase mb-8"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase mb-6 sm:mb-8"
             >
               <Zap className="w-3 h-3" />
               $2.7M+ PROCESSED ON-CHAIN
             </motion.div>
 
             {/* Headline with word reveal */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6">
+            <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-6">
               <RevealText text="The Future of" />
               <br />
               <span className="text-primary">
@@ -193,7 +193,7 @@ export default function HomePage() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-10"
+              className="text-base sm:text-xl text-muted-foreground max-w-2xl leading-relaxed mb-8 sm:mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -204,13 +204,13 @@ export default function HomePage() {
 
             {/* CTAs */}
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              <Link href={ROUTES.AUTH.LOGIN}>
-                <Button size="lg" className="font-mono text-sm cursor-pointer gap-2 group">
+              <Link href={ROUTES.AUTH.LOGIN} className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto font-mono text-sm cursor-pointer gap-2 group">
                   LAUNCH DASHBOARD
                   <motion.span
                     animate={{ x: [0, 4, 0] }}
@@ -220,8 +220,8 @@ export default function HomePage() {
                   </motion.span>
                 </Button>
               </Link>
-              <a href="#features">
-                <Button variant="outline" size="lg" className="font-mono text-sm cursor-pointer">
+              <a href="#features" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto font-mono text-sm cursor-pointer">
                   EXPLORE FEATURES
                 </Button>
               </a>
